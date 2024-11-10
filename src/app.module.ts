@@ -8,9 +8,8 @@ import { IamModule } from './iam/iam.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true, // opsional, agar ConfigModule bisa diakses secara global
-    }),
+    ConfigModule.forRoot(),
+    UsersModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -18,7 +17,6 @@ import { IamModule } from './iam/iam.module';
       }),
       inject: [ConfigService],
     }),
-    UsersModule,
     IamModule,
   ],
   controllers: [AppController],
