@@ -94,7 +94,7 @@ export class AuthService {
 
       return await this.generateTokens(user);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new UnauthorizedException('Invalid refresh token');
     }
   }
@@ -105,7 +105,7 @@ export class AuthService {
       this.signToken<Partial<ActiveUserData>>(
         user.id,
         this.jwtConfiguration.accessTokenTtl,
-        { email: user.email },
+        { email: user.email, role: user.role },
       ),
       this.signToken(user.id, this.jwtConfiguration.refreshTokenTtl, {
         refreshTokenId,
